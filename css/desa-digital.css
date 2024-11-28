@@ -5,7 +5,7 @@ body {
   line-height: 1.5;
   text-align: left;
   margin: 0px;
-  background-image: url('../img/bg_land.jpg');
+  background-image: url('../img/bg6_land.jpg');
   background-size: cover;
 }
 
@@ -718,7 +718,7 @@ box-shadow: 0 4px 8px 0 rgb(0 0 0 / 4%), 0 6px 20px 0 rgb(0 0 0 / 2%);
         width: 99.7%;
     }
   body{
-    background-image: url('../img/bg2.jpg') !important;
+    background-image: url('../img/bg3_potr.jpeg') !important;
     padding: 40px 20px;
   }
   #main{
