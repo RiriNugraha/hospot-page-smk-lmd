@@ -5,8 +5,30 @@ body {
   line-height: 1.5;
   text-align: left;
   margin: 0px;
-  background-image: url('../img/bg_land.jpg');
-  background-size: cover;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/bg_land.jpg'); /* Pastikan path benar */
+    background-size: cover; /* Ukuran background penuh */
+    background-position: center; /* Pusatkan gambar */
+    filter: blur(2px); /* Efek blur */
+    z-index: -1;
+}
+
+.content {
+    position: relative; /* Pastikan konten berada di atas background */
+    z-index: 1; /* Lapisan lebih tinggi dari background */
+    text-align: center; /* Konten rata tengah */
+    color: white; /* Teks berwarna putih */
+    margin-top: 15%; /* Atur jarak konten dari atas */
 }
 
 input {
@@ -712,7 +734,7 @@ box-shadow: 0 4px 8px 0 rgb(0 0 0 / 4%), 0 6px 20px 0 rgb(0 0 0 / 2%);
 }
 
 /* @media */
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
   [class*="col-"] {
         width: 99.7%;
     }
@@ -722,7 +744,26 @@ box-shadow: 0 4px 8px 0 rgb(0 0 0 / 4%), 0 6px 20px 0 rgb(0 0 0 / 2%);
   }
   #main{
     margin-top: 0;
-  }  
+  }   */
+  
+@media screen and (max-width: 800px) {
+    [class*="col-"] {
+      width: 99.7%;
+    }
+    .background-blur {
+        background-image: url('../img/bg2.jpg') !important;
+        background-size: contain; /* Gambar disesuaikan tanpa crop */
+        background-position: top; /* Fokus gambar di bagian atas */
+        filter: blur(2px); /* Kurangi efek blur agar teks tetap jelas */
+    }
+
+    .content {
+        padding: 40px 20px; /* Tambahkan ruang untuk teks agar tidak terlalu penuh */
+    }
+    #main{
+      margin-top: 0;
+    }
+}
 
 .col-md-1 {width: 8.33%;}
 .col-md-2 {width: 16.66%;}
