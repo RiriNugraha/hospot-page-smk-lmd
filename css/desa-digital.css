@@ -469,6 +469,8 @@ button{
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
+
+
 /*table*/
 .table {
   width: 100%;
@@ -920,4 +922,8 @@ hr{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.no-float{
+  float: none;
+  margin: auto;
 }
