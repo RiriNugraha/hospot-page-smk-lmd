@@ -173,13 +173,8 @@ if (!isRedirected()) {
     if (isMobile()) {
         // Cek apakah perangkat adalah Android
         if (isAndroid()) {
-            try {
-                // Coba arahkan ke Google Chrome menggunakan intent
-                window.location.href = "intent://ririnugraha.github.io/hospot-page-smk-lmd/login.html#Intent;scheme=https;package=com.android.chrome;end";
-            } catch (e) {
-                // Jika gagal atau Chrome tidak ada, arahkan dengan tanda redirect
-                redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
-            }
+            // Coba arahkan ke Google Chrome menggunakan intent
+            window.location.href = "intent://ririnugraha.github.io/hospot-page-smk-lmd/login.html#Intent;scheme=https;package=com.android.chrome;end";
         } else {
             // Untuk perangkat mobile non-Android, arahkan dengan tanda redirect
             redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
@@ -188,6 +183,9 @@ if (!isRedirected()) {
         // Untuk perangkat non-mobile, arahkan dengan tanda redirect
         redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
     }
+} else {
+    // Jika sudah diarahkan, hentikan pengalihan
+    console.log("Pengalihan sudah terjadi sebelumnya.");
 }
 </script>
 <script type="text/javascript">
