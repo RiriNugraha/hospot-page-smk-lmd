@@ -9,21 +9,6 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
 <link rel="stylesheet" href="css/desa-digital.css">
 <link rel="icon" href="img/favicon.png" />
-<script>
-    // Deteksi perangkat mobile
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        try {
-            // Coba arahkan ke Google Chrome menggunakan intent
-            window.location.href = "intent://yourloginpage.com#Intent;scheme=https;package=com.android.chrome;end";
-        } catch (e) {
-            // Jika gagal atau Chrome tidak ada, buka di browser default
-            window.location.href = "https://yourloginpage.com";
-        }
-    } else {
-        // Untuk perangkat non-mobile, tetap buka di browser biasa
-        window.location.href = "https://yourloginpage.com";
-    }
-</script>
 </head>
 
 <body>
@@ -162,6 +147,23 @@
 </div>
 <script src="js/desa-digital.js"></script>
 <script type="text/javascript">
+    // Cek apakah URL sudah memiliki tanda redirect
+    if (!window.location.href.includes("redirected=true")) {
+        // Deteksi perangkat mobile
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            try {
+                // Coba arahkan ke Google Chrome menggunakan intent
+                window.location.href = "intent://smkn1leuwimunding.wifi#Intent;scheme=http;package=com.android.chrome;end";
+            } catch (e) {
+                // Jika gagal atau Chrome tidak ada, tambahkan tanda redirect dan buka di browser default
+                window.location.href = "http://smkn1leuwimunding.wifi?redirected=true";
+            }
+        } else {
+            // Untuk perangkat non-mobile, tambahkan tanda redirect dan buka di browser biasa
+            window.location.href = "http://smkn1leuwimunding.wifi?redirected=true";
+        }
+    }
+
 document.login.username.focus();
 document.getElementById('title').innerHTML = window.location.hostname + " > login";
 
