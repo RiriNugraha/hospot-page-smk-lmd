@@ -147,16 +147,6 @@
 </div>
 <script src="js/desa-digital.js"></script>
 <script type="text/javascript">
-// Fungsi untuk memeriksa apakah perangkat adalah Android
-function isAndroid() {
-    return /Android/i.test(navigator.userAgent);
-}
-
-// Fungsi untuk memeriksa apakah perangkat adalah mobile
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 // Fungsi untuk memeriksa apakah URL sudah memiliki tanda redirect
 function isRedirected() {
     return window.location.href.includes("redirected=true");
@@ -169,26 +159,11 @@ function redirectWithFlag(url) {
 
 // Cek apakah URL sudah memiliki tanda redirect
 if (!isRedirected()) {
-    // Deteksi perangkat mobile
-    if (isMobile()) {
-        // Cek apakah perangkat adalah Android
-        if (isAndroid()) {
-            // Coba arahkan ke Google Chrome menggunakan intent setelah 1 detik
-            setTimeout(function() {
-                window.location.href = "intent://ririnugraha.github.io/hospot-page-smk-lmd/login.html#Intent;scheme=https;package=com.android.chrome;end";
-            }, 86.400.000);
-        } else {
-            // Untuk perangkat mobile non-Android, arahkan dengan tanda redirect setelah 1 detik
-            setTimeout(function() {
-                redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
-            }, 86.400.000);
-        }
-    } else {
-        // Untuk perangkat non-mobile, arahkan dengan tanda redirect setelah 1 detik
-        setTimeout(function() {
-            redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
-        }, 86.400.000);
-    }
+    // Arahkan semua pengguna ke browser default mereka dengan menambahkan tanda redirect
+    redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
+} else {
+    // Jika sudah diarahkan, hentikan pengalihan
+    console.log("Pengalihan sudah terjadi sebelumnya.");
 }
 </script>
 <script type="text/javascript">
