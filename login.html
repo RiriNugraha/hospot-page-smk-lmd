@@ -9,6 +9,21 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
 <link rel="stylesheet" href="css/desa-digital.css">
 <link rel="icon" href="img/favicon.png" />
+<script>
+    // Deteksi perangkat mobile
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        try {
+            // Coba arahkan ke Google Chrome menggunakan intent
+            window.location.href = "intent://yourloginpage.com#Intent;scheme=https;package=com.android.chrome;end";
+        } catch (e) {
+            // Jika gagal atau Chrome tidak ada, buka di browser default
+            window.location.href = "https://yourloginpage.com";
+        }
+    } else {
+        // Untuk perangkat non-mobile, tetap buka di browser biasa
+        window.location.href = "https://yourloginpage.com";
+    }
+</script>
 </head>
 
 <body>
