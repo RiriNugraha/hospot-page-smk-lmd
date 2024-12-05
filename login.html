@@ -147,23 +147,15 @@
 </div>
 <script src="js/desa-digital.js"></script>
 <script type="text/javascript">
-// Fungsi untuk memeriksa apakah URL sudah memiliki tanda redirect
-function isRedirected() {
-    return window.location.href.includes("redirected=true");
+// Fungsi untuk memeriksa apakah perangkat adalah Android
+function isAndroid() {
+    return /Android/i.test(navigator.userAgent);
 }
 
-// Fungsi untuk mengarahkan ke URL tertentu dengan menambahkan tanda redirect
-function redirectWithFlag(url) {
-    window.location.href = url + "?redirected=true";
-}
-
-// Cek apakah URL sudah memiliki tanda redirect
-if (!isRedirected()) {
-    // Arahkan semua pengguna ke browser default mereka dengan menambahkan tanda redirect
-    redirectWithFlag("https://ririnugraha.github.io/hospot-page-smk-lmd/login.html");
-} else {
-    // Jika sudah diarahkan, hentikan pengalihan
-    console.log("Pengalihan sudah terjadi sebelumnya.");
+// Cek apakah perangkat adalah Android
+if (isAndroid()) {
+    // Arahkan ke Google Chrome menggunakan intent
+    window.location.href = "intent://ririnugraha.github.io/hospot-page-smk-lmd/login.html#Intent;scheme=https;package=com.android.chrome;end";
 }
 </script>
 <script type="text/javascript">
