@@ -1,1 +1,3 @@
 include: ["*.html", "*.txt", "*.md", "*.js", "js/", "img/", "css/"]
+baseurl: "/hospot-page-smk-lmd"
+url: "https://randishvold.github.io"

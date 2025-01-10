@@ -1,12 +1,14 @@
 ---
 layout: default
-title: Daftar File
+title: Daftar Halaman
 ---
 
-<h1>Daftar File</h1>
+<h1>Daftar Halaman</h1>
 
 <ul>
 {% for file in site.static_files %}
-    <li><a href="{{ file.path }}">{{ file.name }}</a></li>
+    {% if file.extname == ".html" %}
+        <li><a href="{{ file.path | relative_url }}">{{ file.name }}</a></li>
+    {% endif %}
 {% endfor %}
 </ul>
