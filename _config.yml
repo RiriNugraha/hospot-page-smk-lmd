@@ -1,0 +1,1 @@
+include: ["*.html", "*.txt", "*.md", "*.js", "js/", "img/", "css/"]
