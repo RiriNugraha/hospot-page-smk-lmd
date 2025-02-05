@@ -928,3 +928,45 @@ hr{
   float: none;
   margin: auto;
 }
+
+/* Efek Kaca pada Form Login */
+.card {
+  background: rgba(255, 255, 255, 0.1); /* Transparansi */
+  backdrop-filter: blur(5px); /* Efek blur */
+  border-radius: 10px; /* Sudut melengkung */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Border transparan */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Shadow untuk efek kaca */
+}
+
+/* Responsivitas */
+@media screen and (max-width: 800px) {
+  .card {
+    width: 90%; /* Lebar form di mobile */
+    margin: 0 auto; /* Pusatkan form */
+  }
+}
+
+/* Animasi & Interaksi pada Tombol Login */
+.bg-login {
+  transition: all 0.3s ease; /* Transisi halus */
+}
+
+.bg-login:hover {
+  background-color: rgb(5, 140, 180); /* Perubahan warna saat hover */
+  transform: scale(1.05); /* Efek scale */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5); /* Shadow lebih tebal */
+}
+
+/* Efek Interaksi pada Elemen Form */
+.form-control-md:hover {
+  border-color: rgba(255, 255, 255, 0.5); /* Perubahan border saat hover */
+  opacity: 0.9; /* Perubahan opacity */
+}
+
+/* Konsistensi Desain */
+.box-semua {
+  background: rgba(255, 255, 255, 0.05); /* Transparansi untuk container utama */
+  backdrop-filter: blur(5px); /* Efek blur */
+  border-radius: 10px; /* Sudut melengkung */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Border transparan */
+}
