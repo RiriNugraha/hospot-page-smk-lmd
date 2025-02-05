@@ -1,1 +1,1 @@
-### preview [disini](https://randishvold.github.io/hospot-page-smk-lmd/)
+### preview [disini](https://ririnugraha.github.io/hospot-page-smk-lmd/)
