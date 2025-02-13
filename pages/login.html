@@ -30,8 +30,11 @@
 							</div>
 						</div>
 						<div class="row">
-						<div class="bawah-judul" style="color:#efefef;"><p>Silahkan masukkan kode <b>Voucher</b> yang anda miliki</p></div>
-						</div>
+						<div class="row">
+              <div class="bawah-judul" id="bawahJudul" style="color:#efefef;">
+                <p>Silahkan masukkan <b>USERNAME</b> dan <b>PASSWORD</b> anda</p>
+              </div>
+            </div>
 						<div class="row">
 							<div class="col-12">
 								<div class="card ">
@@ -46,7 +49,7 @@
 	
 									<script type="text/javascript" src="/md5.js"></script>
 									<script type="text/javascript">
-									<!--
+									//<!--
 	    							function doLogin() {
 									document.sendin.username.value = document.login.username.value;
 									document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
@@ -63,27 +66,27 @@
 						<input type="hidden" name="dst" value="$(link-orig)" />
 						<input type="hidden" name="popup" value="true" />
 							<div class="row">
-								$(if trial == 'yes')
-								<div class="col-4 col-md-4"> 
-								<div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
-								</div>
-								<div class="col-4 col-md-4">
-								<div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
-								</div>
-								<div class="col-4 col-md-4">
-								<a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">
-								<div class="box mr-2 pointer text-center text-light tombol" id="btntrial">GRATIS</div></a>
-								</div>
-								
-								$(elif trial == 'no')
-								<div class="col-6 col-md-6"> 
-								<div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
-								</div>
-								<div class="col-6 col-md-6">
-								<div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
-								</div>
-								$(endif)
-							</div>
+                $(if trial == 'yes')
+                <div class="col-4 col-md-4">
+                  <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                </div>
+                <div class="col-4 col-md-4"> 
+                  <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                </div>
+                <div class="col-4 col-md-4">
+                   <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">
+                      <div class="box mr-2 pointer text-center text-light tombol" id="btntrial">GRATIS</div>
+                  </a>
+                </div>
+                $(elif trial == 'no')
+                <div class="col-6 col-md-6">
+                  <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                </div>
+                <div class="col-6 col-md-6"> 
+                  <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                </div>
+                $(endif)
+              </div>
 								<input class="form-control-md mr-t-10 plch-center text-center" name="username" type="text" value="$(username)" placeholder="Masukkan Voucher" />
 								<input class="form-control-md mr-t-10 plch-center text-center" name="password" type="hidden" placeholder="Masukkan Password" />
 							<div class="row">
@@ -170,33 +173,54 @@ btnmem.style.color = "#fff";
 btntrial.style.background = "rgb(255 255 255 / 17%)";
 btntrial.style.color = "#fff";
 
-function voucher(){
-  username.focus();
-  username.onchange = setpass;
-  username.placeholder = "Masukkan Voucher";
-  password.type = "hidden";
-  password.value = username.value;  
-  btnvcr.style.background = "rgb(7 168 216)";
-  btnvcr.style.color = "#fff";
-	btnmem.style.background = "rgb(255 255 255 / 17%)";
-	btnmem.style.color = "#fff";
-	btntrial.style.background = "rgb(255 255 255 / 17%)";
-	btntrial.style.color = "#fff";
+// Fungsi untuk mengubah teks bawah-judul
+function updateBawahJudul(option) {
+  const bawahJudul = document.getElementById('bawahJudul');
+  if (option === 'member') {
+    bawahJudul.innerHTML = '<p>Silahkan masukkan <b>USERNAME</b> dan <b>PASSWORD</b> anda</p>';
+  } else if (option === 'voucher') {
+    bawahJudul.innerHTML = '<p>Silahkan masukkan kode <b>VOUCHER</b> yang anda miliki</p>';
+  }
 }
 
-function member(){
+function member() {
   username.focus();
   username.onchange = "";
   username.placeholder = "Masukkan Username";
-  password.type= "password";
+  password.type = "password";
   password.value = "";
   btnmem.style.background = "rgb(7 168 216)";
   btnmem.style.color = "#fff";
   btnvcr.style.background = "rgb(255 255 255 / 17%)";
   btnvcr.style.color = "#fff";
-  btntrial.style.background = "rgb(255 255 255 / 17%)";
-  btntrial.style.color = "#fff";
+  if (typeof btntrial !== 'undefined') {
+    btntrial.style.background = "rgb(255 255 255 / 17%)";
+    btntrial.style.color = "#fff";
+  }
+  updateBawahJudul('member'); // Update teks bawah-judul
 }
+
+function voucher() {
+  username.focus();
+  username.onchange = setpass;
+  username.placeholder = "Masukkan Voucher";
+  password.type = "hidden";
+  password.value = username.value;
+  btnvcr.style.background = "rgb(7 168 216)";
+  btnvcr.style.color = "#fff";
+  btnmem.style.background = "rgb(255 255 255 / 17%)";
+  btnmem.style.color = "#fff";
+  if (typeof btntrial !== 'undefined') {
+    btntrial.style.background = "rgb(255 255 255 / 17%)";
+    btntrial.style.color = "#fff";
+  }
+  updateBawahJudul('voucher'); // Update teks bawah-judul
+}
+
+// Set default ke Member saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function () {
+  member(); // Panggil fungsi member() untuk set default
+});
 
 </script>
 <script src="js/slim.min.js"></script>
