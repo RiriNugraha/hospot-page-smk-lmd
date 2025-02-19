@@ -34,7 +34,7 @@
             </div>
             <div class="row">
               <div class="bawah-judul" id="bawahJudul" style="color:#efefef;">
-                <p>Silahkan masukkan <b>USERNAME</b> dan <b>PASSWORD</b> anda</p>
+                <p>Silahkan masukkan kode <b>VOUCHER</b> yang anda miliki</p>
               </div>
             </div>
             <div class="row">
@@ -61,13 +61,13 @@
                     <form autocomplete="off" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
                       <input type="hidden" name="dst" value="$(link-orig)" />
                       <input type="hidden" name="popup" value="true" />
-                      <div class="row">
+                        <div class="row">
                         $(if trial == 'yes')
                         <div class="col-4 col-md-4">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
                         </div>
                         <div class="col-4 col-md-4">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
                         </div>
                         <div class="col-4 col-md-4">
                           <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">
@@ -76,10 +76,10 @@
                         </div>
                         $(elif trial == 'no')
                         <div class="col-6 col-md-6">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
                         </div>
                         <div class="col-6 col-md-6">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
                         </div>
                         $(endif)
                       </div>
@@ -148,26 +148,50 @@
   <script type="text/javascript">
     document.login.username.focus();
     document.getElementById('title').innerHTML = window.location.hostname + " > login";
-
+  
     var username = document.login.username;
     var password = document.login.password;
-    var luser = document.getElementById("luser");
-    var lpass = document.getElementById("lpass");
     var btnmem = document.getElementById("btnmem");
     var btnvcr = document.getElementById("btnvcr");
-
-    function setpass() {
-      var user = username.value;
-      password.value = user;
+    var btntrial = document.getElementById("btntrial"); // Pastikan ini ada jika opsi trial tersedia
+  
+    // Fungsi untuk mengatur tampilan tombol Voucher sebagai default
+    function setVoucherDefault() {
+      username.focus();
+      username.onchange = setpass;
+      username.placeholder = "Masukkan Voucher";
+      password.type = "hidden";
+      password.value = username.value;
+      btnvcr.style.background = "rgb(7, 168, 216)"; // Warna aktif (biru)
+      btnvcr.style.color = "#fff";
+      btnmem.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+      btnmem.style.color = "#fff";
+      if (btntrial) {
+        btntrial.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+        btntrial.style.color = "#fff";
+      }
+      updateBawahJudul('voucher');
     }
-    username.onchange = setpass;
-    btnvcr.style.background = "rgb(7 168 216)";
-    btnvcr.style.color = "#fff";
-    btnmem.style.background = "rgb(255 255 255 / 17%)";
-    btnmem.style.color = "#fff";
-    btntrial.style.background = "rgb(255 255 255 / 17%)";
-    btntrial.style.color = "#fff";
-
+  
+    // Fungsi untuk mengatur tampilan tombol Member
+    function setMemberDefault() {
+      username.focus();
+      username.onchange = "";
+      username.placeholder = "Masukkan Username";
+      password.type = "password";
+      password.value = "";
+      btnmem.style.background = "rgb(7, 168, 216)"; // Warna aktif (biru)
+      btnmem.style.color = "#fff";
+      btnvcr.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+      btnvcr.style.color = "#fff";
+      if (btntrial) {
+        btntrial.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+        btntrial.style.color = "#fff";
+      }
+      updateBawahJudul('member');
+    }
+  
+    // Fungsi untuk mengubah teks di bawah judul
     function updateBawahJudul(option) {
       const bawahJudul = document.getElementById('bawahJudul');
       if (option === 'member') {
@@ -176,39 +200,26 @@
         bawahJudul.innerHTML = '<p>Silahkan masukkan kode <b>VOUCHER</b> yang anda miliki</p>';
       }
     }
-
-    function member() {
-      username.focus();
-      username.onchange = "";
-      username.placeholder = "Masukkan Username";
-      password.type = "password";
-      password.value = "";
-      btnmem.style.background = "rgb(7 168 216)";
-      btnmem.style.color = "#fff";
-      btnvcr.style.background = "rgb(255 255 255 / 17%)";
-      btnvcr.style.color = "#fff";
-      if (typeof btntrial !== 'undefined') {
-        btntrial.style.background = "rgb(255 255 255 / 17%)";
-        btntrial.style.color = "#fff";
-      }
-      updateBawahJudul('member');
+  
+    // Jalankan fungsi setVoucherDefault saat halaman pertama kali dimuat
+    window.onload = function() {
+      setVoucherDefault(); // Atur tombol Voucher sebagai default
+    };
+  
+    // Fungsi untuk mengisi password dengan nilai username
+    function setpass() {
+      var user = username.value;
+      password.value = user;
     }
-
+  
+    // Event listener untuk tombol Voucher
     function voucher() {
-      username.focus();
-      username.onchange = setpass;
-      username.placeholder = "Masukkan Voucher";
-      password.type = "hidden";
-      password.value = username.value;
-      btnvcr.style.background = "rgb(7 168 216)";
-      btnvcr.style.color = "#fff";
-      btnmem.style.background = "rgb(255 255 255 / 17%)";
-      btnmem.style.color = "#fff";
-      if (typeof btntrial !== 'undefined') {
-        btntrial.style.background = "rgb(255 255 255 / 17%)";
-        btntrial.style.color = "#fff";
-      }
-      updateBawahJudul('voucher');
+      setVoucherDefault();
+    }
+  
+    // Event listener untuk tombol Member
+    function member() {
+      setMemberDefault();
     }
   </script>
   <script src="js/slim.min.js"></script>

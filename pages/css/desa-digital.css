@@ -843,14 +843,3 @@ hr {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-#btnmem {
-  background: rgb(7, 168, 216);
-  color: #fff;
-}
-
-#btnvcr,
-#btntrial {
-  background: rgba(255, 255, 255, 0.17);
-  color: #fff;
-}
