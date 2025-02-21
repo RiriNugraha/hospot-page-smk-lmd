@@ -64,10 +64,10 @@
                         <div class="row">
                         $(if trial == 'yes')
                         <div class="col-4 col-md-4">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="setVoucherDefault()">VOUCHER</div>
                         </div>
                         <div class="col-4 col-md-4">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="setMemberDefault()">MEMBER</div>
                         </div>
                         <div class="col-4 col-md-4">
                           <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">
@@ -76,10 +76,10 @@
                         </div>
                         $(elif trial == 'no')
                         <div class="col-6 col-md-6">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="voucher()">VOUCHER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnvcr" onclick="setVoucherDefault()">VOUCHER</div>
                         </div>
                         <div class="col-6 col-md-6">
-                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="member()">MEMBER</div>
+                          <div class="box mr-2 pointer text-center text-light tombol" id="btnmem" onclick="setMemberDefault()">MEMBER</div>
                         </div>
                         $(endif)
                       </div>
@@ -155,43 +155,43 @@
     var btnvcr = document.getElementById("btnvcr");
     var btntrial = document.getElementById("btntrial"); // Pastikan ini ada jika opsi trial tersedia
   
-    // Fungsi untuk mengatur tampilan tombol Voucher sebagai default
+    // Fungsi untuk mengatur tampilan tombol Voucher aktif
     function setVoucherDefault() {
       username.focus();
       username.onchange = setpass;
       username.placeholder = "Masukkan Voucher";
       password.type = "hidden";
       password.value = username.value;
-      btnvcr.style.background = "rgb(7, 168, 216)"; // Warna aktif (biru)
+      btnvcr.style.background = "rgb(7, 168, 216)";
       btnvcr.style.color = "#fff";
-      btnmem.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+      btnmem.style.background = "rgba(255, 255, 255, 0.17)";
       btnmem.style.color = "#fff";
       if (btntrial) {
-        btntrial.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+        btntrial.style.background = "rgba(255, 255, 255, 0.17)";
         btntrial.style.color = "#fff";
       }
       updateBawahJudul('voucher');
     }
-  
-    // Fungsi untuk mengatur tampilan tombol Member
+    
+    // Fungsi untuk mengatur tampilan tombol Member aktif
     function setMemberDefault() {
       username.focus();
       username.onchange = "";
       username.placeholder = "Masukkan Username";
       password.type = "password";
       password.value = "";
-      btnmem.style.background = "rgb(7, 168, 216)"; // Warna aktif (biru)
+      btnmem.style.background = "rgb(7, 168, 216)";
       btnmem.style.color = "#fff";
-      btnvcr.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+      btnvcr.style.background = "rgba(255, 255, 255, 0.17)";
       btnvcr.style.color = "#fff";
       if (btntrial) {
-        btntrial.style.background = "rgba(255, 255, 255, 0.17)"; // Warna tidak aktif (abu-abu)
+        btntrial.style.background = "rgba(255, 255, 255, 0.17)";
         btntrial.style.color = "#fff";
       }
       updateBawahJudul('member');
     }
-  
-    // Fungsi untuk mengubah teks di bawah judul
+    
+    // Fungsi untuk menubah teks class bawah judul
     function updateBawahJudul(option) {
       const bawahJudul = document.getElementById('bawahJudul');
       if (option === 'member') {
@@ -201,25 +201,15 @@
       }
     }
   
-    // Jalankan fungsi setVoucherDefault saat halaman pertama kali dimuat
+    // Jalankan fungsi saat halaman pertama kali dimuat
     window.onload = function() {
-      setVoucherDefault(); // Atur tombol Voucher sebagai default
+      setMemberDefault(); 
     };
   
     // Fungsi untuk mengisi password dengan nilai username
     function setpass() {
       var user = username.value;
       password.value = user;
-    }
-  
-    // Event listener untuk tombol Voucher
-    function voucher() {
-      setVoucherDefault();
-    }
-  
-    // Event listener untuk tombol Member
-    function member() {
-      setMemberDefault();
     }
   </script>
   <script src="js/slim.min.js"></script>
